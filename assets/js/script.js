@@ -1,6 +1,6 @@
 // ticketmaster api key = SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk
 // amadeus hotel api key = 1sL9dFsOmJ6Nc4AVYfANVRFmiQwN41y8
-var userInput = "";
+var userInput = "miami";
 var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var search = function(event) {
@@ -97,6 +97,26 @@ var hotelInfo = function() {
         }
     })
 }
+
+// news api fetch if we want to scrap the hotels
+var newsInfo = function() {
+    var newsUrl = "https://gnews.io/api/v4/search?q=" + userInput + "&lang=en&token=458db7b885eab5f1dca2b9aae7d989b7";
+    fetch(newsUrl)
+    .then (function(response) {
+        // request was successful
+        if(response.ok) {
+            response.json().then(function(data) {
+            for (i = 0; i < 10; i++) {
+                var headLine = data.articles[i].title;
+                var newsUrl = data.articles[i].url;
+                var source = data.articles[i].source.name;
+                console.log(headLine, newsUrl, source);
+                }
+            });
+        } 
+    });
+    
+};
 
 
 // on submit run search function
