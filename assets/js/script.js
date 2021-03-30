@@ -1,4 +1,5 @@
 var userInput = '';
+var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var search = function(event) {
     // prevent refresh
@@ -6,16 +7,57 @@ var search = function(event) {
     
     // store user input value
     userInput = $('#city-input').val();
-    console.log('userInput', userInput);
 
     // clear input value
     $('#city-input').val('');
     
+    // run function that displays next events
+    createEventElements();
+    
     // run API Call function
 }
 
+var createEventElements = function () {
+    // create search results title
+    var searchResultTitleEl = $('<p>')
+        .text('Next events for ' + userInput)
+        .attr('id', 'result-title');
+  
+    // container to hold upcoming events
+    var searchResultsContainerEl = $('<div>').attr('id', 'search-results-container');
+  
+    // append elements to sidebar
+    $('#sidebar').append(searchResultTitleEl, searchResultsContainerEl);
+
+    // loop to create upcoming events (maximum of 8) 
+    for (i = 0; i < 8; i++) {
+        // create div for each event
+        var eventResultsEl = $('<div>').attr('id', 'event-results' + idArr[i]);
+        
+        $('#search-results-container').append(eventResultsEl);
+    
+        // create search result elements
+        var dateEl = $('<p>')
+            .attr('id', 'date' + idArr[i])
+            .text('date' + idArr[i] );
+        var timeEl = $('<p>')
+            .attr('id', 'time' + idArr[i])
+            .text('time' + idArr[i]);
+        var cityEl = $('<p>')
+            .attr('id', 'city' + idArr[i])
+            .text('city' + idArr[i]);
+        var venueEl = $('<p>')
+            .attr('id', 'venue' + idArr[i])
+            .text('venue' + idArr[i]);
+        
+        $('#event-results' + idArr[i]).append(dateEl, timeEl, cityEl, venueEl);
+    };
+};
+
 // on submit run search function
 $('#nav').on('submit', search);
+
+
 
     // 1 - Get User Input
     //     * store in var userInput on submit
