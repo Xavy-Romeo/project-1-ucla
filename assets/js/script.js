@@ -118,7 +118,6 @@ var newsInfo = function() {
     
 };
 
-
 // on submit run search function
 $('#nav').on('submit', search);
 
