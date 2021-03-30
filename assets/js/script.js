@@ -1,5 +1,5 @@
 // ticketmaster api key = SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk
-var userInput = "miami";
+var userInput = "";
 var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var search = function(event) {
@@ -67,7 +67,7 @@ var searchApis = function() {
                     var tmEvent = data._embedded.events[i].name;
                     var tmDate = data._embedded.events[i].dates.start.localDate;
                     var tmVenue = data._embedded.events[i]._embedded.venues[0].name;
-                    //
+                    // can add more event info if desired
                     console.log(tmEvent, tmDate, tmVenue);
                 }
             });
