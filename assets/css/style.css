@@ -25,7 +25,6 @@
 
 #content1{
     background: sandybrown;
-    width: 1000px;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;
