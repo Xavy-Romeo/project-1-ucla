@@ -1,4 +1,6 @@
-var userInput = '';
+// ticketmaster api key = SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk
+// amadeus hotel api key = 1sL9dFsOmJ6Nc4AVYfANVRFmiQwN41y8
+var userInput = "";
 var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var search = function(event) {
@@ -52,6 +54,68 @@ var createEventElements = function () {
         
         $('#event-results' + idArr[i]).append(dateEl, timeEl, cityEl, venueEl);
     };
+};
+
+// pulls next 8 upcoming events from city searched
+var eventInfo = function() {
+    var ticketMasterUrl = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + userInput + "&apikey=SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk"
+    fetch(ticketMasterUrl)
+    .then (function(response) {
+        // request was successful
+        if(response.ok) {
+            response.json().then(function(data) {
+            for (i = 0; i < 8; i++) {
+                    var tmEvent = data._embedded.events[i].name;
+                    var tmDate = data._embedded.events[i].dates.start.localDate;
+                    var tmVenue = data._embedded.events[i]._embedded.venues[0].name;
+                    // can add more event info if desired
+                    console.log(tmEvent, tmDate, tmVenue);
+                }
+            });
+        } 
+    });
+    
+};
+
+var hotelInfo = function() {
+    var hotelApi = "https://hotels4.p.rapidapi.com/locations/search?query=" + userInput + "&locale=en_US";
+    fetch(hotelApi, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "4da98aa17amshf3cf8e4c6ea8b8ep17fd5djsn80f88772eda8",
+		"x-rapidapi-host": "hotels4.p.rapidapi.com"
+	}
+})
+    .then (function(response) {
+        if(response.ok) {
+            response.json().then(function(data) {
+                for (i = 0; i < 3; i++) {
+                    var hotels = data.suggestions[1].entities[i].name;
+                    console.log(hotels);
+                }
+            })
+        }
+    })
+}
+
+// news api fetch if we want to scrap the hotels
+var newsInfo = function() {
+    var newsUrl = "https://gnews.io/api/v4/search?q=" + userInput + "&lang=en&token=458db7b885eab5f1dca2b9aae7d989b7";
+    fetch(newsUrl)
+    .then (function(response) {
+        // request was successful
+        if(response.ok) {
+            response.json().then(function(data) {
+            for (i = 0; i < 10; i++) {
+                var headLine = data.articles[i].title;
+                var newsUrl = data.articles[i].url;
+                var source = data.articles[i].source.name;
+                console.log(headLine, newsUrl, source);
+                }
+            });
+        } 
+    });
+    
 };
 
 // on submit run search function
