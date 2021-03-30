@@ -1,4 +1,5 @@
 // ticketmaster api key = SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk
+// amadeus hotel api key = 1sL9dFsOmJ6Nc4AVYfANVRFmiQwN41y8
 var userInput = "";
 var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -56,7 +57,7 @@ var createEventElements = function () {
 };
 
 // pulls next 8 upcoming events from city searched
-var searchApis = function() {
+var eventInfo = function() {
     var ticketMasterUrl = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + userInput + "&apikey=SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk"
     fetch(ticketMasterUrl)
     .then (function(response) {
@@ -75,7 +76,28 @@ var searchApis = function() {
     });
     
 };
-searchApis();
+
+var hotelInfo = function() {
+    var hotelApi = "https://hotels4.p.rapidapi.com/locations/search?query=" + userInput + "&locale=en_US";
+    fetch(hotelApi, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "4da98aa17amshf3cf8e4c6ea8b8ep17fd5djsn80f88772eda8",
+		"x-rapidapi-host": "hotels4.p.rapidapi.com"
+	}
+})
+    .then (function(response) {
+        if(response.ok) {
+            response.json().then(function(data) {
+                for (i = 0; i < 3; i++) {
+                    var hotels = data.suggestions[1].entities[i].name;
+                    console.log(hotels);
+                }
+            })
+        }
+    })
+}
+
 
 // on submit run search function
 $('#nav').on('submit', search);
