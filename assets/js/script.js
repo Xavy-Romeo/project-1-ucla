@@ -1,6 +1,6 @@
 // ticketmaster api key = SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk
 // amadeus hotel api key = 1sL9dFsOmJ6Nc4AVYfANVRFmiQwN41y8
-var userInput = "miami";
+var userInput = "";
 var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var search = function(event) {
