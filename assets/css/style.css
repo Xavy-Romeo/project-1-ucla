@@ -19,12 +19,15 @@
 }
 
 #sidebar{
-   background: salmon;
    grid-area: sidebar;
+   overflow-y: scroll;
 }
 
 #content1{
     background: sandybrown;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
     grid-area: content1
 }
 
