@@ -1,7 +1,11 @@
+>>>>>>>feature/apis
 // ticketmaster api key = SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk
 // amadeus hotel api key = 1sL9dFsOmJ6Nc4AVYfANVRFmiQwN41y8
 var userInput = "";
 var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+>>>>main
+var us
 
 var search = function(event) {
     // prevent refresh
@@ -17,6 +21,7 @@ var search = function(event) {
     createEventElements();
     
     // run API Call function
+    eventInfo(userInput);
 }
 
 var createEventElements = function () {
@@ -57,7 +62,7 @@ var createEventElements = function () {
 };
 
 // pulls next 8 upcoming events from city searched
-var eventInfo = function() {
+var eventInfo = function(userInput) {
     var ticketMasterUrl = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + userInput + "&apikey=SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk"
     fetch(ticketMasterUrl)
     .then (function(response) {
