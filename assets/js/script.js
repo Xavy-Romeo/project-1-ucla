@@ -1,7 +1,7 @@
 >>>>>>>feature/apis
 // ticketmaster api key = SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk
 // amadeus hotel api key = 1sL9dFsOmJ6Nc4AVYfANVRFmiQwN41y8
-var userInput = "";
+var userInput = "miami";
 var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 >>>>main
@@ -73,35 +73,15 @@ var eventInfo = function(userInput) {
                     var tmEvent = data._embedded.events[i].name;
                     var tmDate = data._embedded.events[i].dates.start.localDate;
                     var tmVenue = data._embedded.events[i]._embedded.venues[0].name;
+                    var tmLink = data._embedded.events[i].url;
                     // can add more event info if desired
-                    console.log(tmEvent, tmDate, tmVenue);
+                    console.log(tmEvent, tmDate, tmVenue, tmLink);
                 }
             });
         } 
     });
     
 };
-
-var hotelInfo = function() {
-    var hotelApi = "https://hotels4.p.rapidapi.com/locations/search?query=" + userInput + "&locale=en_US";
-    fetch(hotelApi, {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-key": "4da98aa17amshf3cf8e4c6ea8b8ep17fd5djsn80f88772eda8",
-		"x-rapidapi-host": "hotels4.p.rapidapi.com"
-	}
-})
-    .then (function(response) {
-        if(response.ok) {
-            response.json().then(function(data) {
-                for (i = 0; i < 3; i++) {
-                    var hotels = data.suggestions[1].entities[i].name;
-                    console.log(hotels);
-                }
-            })
-        }
-    })
-}
 
 // news api fetch if we want to scrap the hotels
 var newsInfo = function() {
@@ -112,10 +92,11 @@ var newsInfo = function() {
         if(response.ok) {
             response.json().then(function(data) {
             for (i = 0; i < 10; i++) {
-                var headLine = data.articles[i].title;
+                var newsHeadLine = data.articles[i].title;
                 var newsUrl = data.articles[i].url;
-                var source = data.articles[i].source.name;
-                console.log(headLine, newsUrl, source);
+                var newsSource = data.articles[i].source.name;
+                var newsImage = data.articles[i].image;
+                console.log(newsHeadLine, newsUrl, newsSource, newsImage);
                 }
             });
         } 
