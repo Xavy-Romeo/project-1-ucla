@@ -1,67 +1,61 @@
->>>>>>>feature/apis
 // ticketmaster api key = SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk
 // amadeus hotel api key = 1sL9dFsOmJ6Nc4AVYfANVRFmiQwN41y8
-var userInput = "miami";
+var userInput = "";
 var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
->>>>main
-var us
 
 var search = function(event) {
     // prevent refresh
     event.preventDefault();
     
     // store user input value
-    userInput = $('#city-input').val();
+    userInput = $('#city-input').val().trim().toUpperCase();
 
     // clear input value
     $('#city-input').val('');
     
     // run function that displays next events
-    createEventElements();
+    // createEventElements();
     
     // run API Call function
     eventInfo(userInput);
 }
 
-var createEventElements = function () {
+var createEventElements = function (data) {
+
     // create search results title
     var searchResultTitleEl = $('<p>')
-        .text('Next events for ' + userInput)
+        .text('Next events in: ' + userInput)
         .attr('id', 'result-title');
-  
-    // container to hold upcoming events
-    var searchResultsContainerEl = $('<div>').attr('id', 'search-results-container');
-  
-    // append elements to sidebar
-    $('#sidebar').append(searchResultTitleEl, searchResultsContainerEl);
 
-    // loop to create upcoming events (maximum of 8) 
-    for (i = 0; i < 8; i++) {
-        // create div for each event
-        var eventResultsEl = $('<div>').attr('id', 'event-results' + idArr[i]);
+    // append title to events section
+    $('#sidebar').append(searchResultTitleEl);
+
+        for (i = 0; i < 10; i++) {
+            var cardEl = $('<div>')
+                .addClass('card')
+                .attr('id', 'event-card' + idArr[i]);
         
-        $('#search-results-container').append(eventResultsEl);
-    
-        // create search result elements
-        var dateEl = $('<p>')
-            .attr('id', 'date' + idArr[i])
-            .text('date' + idArr[i] );
-        var timeEl = $('<p>')
-            .attr('id', 'time' + idArr[i])
-            .text('time' + idArr[i]);
-        var cityEl = $('<p>')
-            .attr('id', 'city' + idArr[i])
-            .text('city' + idArr[i]);
-        var venueEl = $('<p>')
-            .attr('id', 'venue' + idArr[i])
-            .text('venue' + idArr[i]);
-        
-        $('#event-results' + idArr[i]).append(dateEl, timeEl, cityEl, venueEl);
-    };
+            var cardHeaderEl = $('<div>')
+                .addClass('cardDivider')
+                .attr('id', 'card-header' + idArr[i])
+                .text(data._embedded.events[i].name);    
+            var cardImageEl = $('<img>')
+                .attr('src', data._embedded.events[i].images[0].url)
+                .attr('id', 'card-image' + idArr[i]);
+            var cardInfo = $('<div>')
+                .addClass('card-section')
+                .attr('id', 'card-info' + idArr[i])
+                .html('<p> Date: ' + data._embedded.events[i].dates.start.localDate + '</p>'
+                    + '<p> Venue: ' + data._embedded.events[i]._embedded.venues[0].name + '</p>'
+                    + '<a href="' + data._embedded.events[i].url + '">Buy Tickets Now</a>');
+
+            $('#sidebar').append(cardEl);
+
+            $('#event-card' + idArr[i]).append(cardHeaderEl, cardImageEl, cardInfo);
+        }
 };
 
-// pulls next 8 upcoming events from city searched
+// pulls upcoming events from city searched
 var eventInfo = function(userInput) {
     var ticketMasterUrl = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + userInput + "&apikey=SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk"
     fetch(ticketMasterUrl)
@@ -69,14 +63,7 @@ var eventInfo = function(userInput) {
         // request was successful
         if(response.ok) {
             response.json().then(function(data) {
-            for (i = 0; i < 8; i++) {
-                    var tmEvent = data._embedded.events[i].name;
-                    var tmDate = data._embedded.events[i].dates.start.localDate;
-                    var tmVenue = data._embedded.events[i]._embedded.venues[0].name;
-                    var tmLink = data._embedded.events[i].url;
-                    // can add more event info if desired
-                    console.log(tmEvent, tmDate, tmVenue, tmLink);
-                }
+                createEventElements(data);
             });
         } 
     });
