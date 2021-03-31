@@ -3,14 +3,14 @@
 .container{
     display:grid;
     height:100vh;
-    gap: .2rem;
+    gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 2fr 2fr 2fr;
     grid-template-areas:
     "nav nav nav nav"
     "sidebar content1 content1 content1"
-    "sidebar content2 content2 content2"
-    "sidebar content3 content3 content3"
+    "sidebar content1 content1 content1"
+    "sidebar content1 content1 content1"
 }
 
 #nav{
@@ -24,14 +24,13 @@
 }
 
 #content1{
-    background: sandybrown;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
+    /* display: flex;
+    flex-wrap: wrap; */
+    overflow-y: scroll;
     grid-area: content1
 }
 
-#content2{
+/* #content2{
     background: skyblue;
     grid-area: content2
 }
@@ -39,7 +38,7 @@
 #content3{
     background: teal;
     grid-area: content3
-}
+} */
 
 @media only screen and (max-width:550px) {
     .container{
