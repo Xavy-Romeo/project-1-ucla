@@ -53,16 +53,12 @@
 
 
 .button-group {
-    margin-top: 3rem;
-    margin-left: 2rem;
+    margin-top: 3.5rem;
+    margin-right: 3rem;
+    float: right;
 }
 
 #city-input {
     width: 50%;
     margin-left: 2rem;
-}
-
-#city-search-p {
-    padding-left: 2rem;
-    padding-top: .9rem;
 }
