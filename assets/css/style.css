@@ -14,7 +14,7 @@
 }
 
 #nav{
-    background: #22bb5b;
+    background-color: rgb(39, 141, 204);
     grid-area: nav;
 }
 
@@ -77,15 +77,19 @@
     height: 200px;
 }
 
-.searchbar {
-    width: 50%;
-    margin-top: 20px;
-    margin-bottom: 40px;
+.logo-image {
+    float: right;
+    margin-top: 0;
+    height: 100px;
+    padding-top: 20px;
+
 }
 
-.searchbutton {
-    height: 40px;
-    align-content: center;
+.searchbar {
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    display:inline-flex;
 }
 
 .input-height {
