@@ -83,27 +83,39 @@ var createEventElements = function (data) {
 var createNewsElements = function(data) {
 
     for (i = 0; i < 4; i++) {
+        var newsCardEl = $('<div>')
+            .addClass('cell flex-container')
+            .attr('id', 'news-card-container' + idArr[i]);
+        $('.news-card').append(newsCardEl);
+        
         var newsEl = $('<div>')
             .addClass('card')
-            .attr('id', 'news-card' + idArr[i]);
-        
-        $('#content1').append(newsEl);
+            .attr('id', 'card' +idArr[i]);
 
+        $('#news-card-container' + idArr[i]).append(newsEl);
+
+        var newsHeadlineEl = $('<div>')
+            .html('<p>' + data.articles[i].title + '</p>')
+            .addClass('bold card-divider');
         var newsImageEl = $('<img>')
             .attr('src', data.articles[i].image)
-            .addClass("image-height")
-        var newsSourceEl = $('<p>')
-            .text(data.articles[i].source.name)
-            .addClass('bold');
-        var newsHeadlineEl = $('<p>')
-            .text(data.articles[i].title)
-            .addClass('bold');
-        var newsUrlEl = $('<a>')
-            .attr('href', data.articles[i].url)
-            .text('Click Here to View Article');
+            .addClass("image-height");
+        var newsSourceEl = $('<div>')
+            .html('<p class="bold">' + data.articles[i].source.name + '</p>'
+                + '<a href=' + data.articles[i].url + '>Click Here to View Article</a>')
+            .addClass('card-section');
 
-        $('#news-card' + idArr[i]).append(newsHeadlineEl, newsImageEl, newsSourceEl, newsUrlEl);
-    };  
+        $('#card' + idArr[i]).append(newsHeadlineEl, newsImageEl, newsSourceEl);
+    };
+        // .text(data.articles[i].source.name)
+            // .addClass('bold');
+        
+        // var newsUrlEl = $('<a>')
+        //     .attr('href', data.articles[i].url)
+        //     .text('Click Here to View Article');
+
+        
+     
 };
 
 // on submit run search function
