@@ -82,7 +82,7 @@ var createEventElements = function (data) {
             
             // create event card header
             var eventHeaderEl = $('<div>')
-                .addClass('cardDivider')
+                .addClass('cardDivider event-header')
                 .attr('id', 'card-header' + idArr[i])
                 .text(data._embedded.events[i].name);    
             // create event card image
