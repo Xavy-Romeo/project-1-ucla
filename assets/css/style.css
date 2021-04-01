@@ -76,3 +76,20 @@
 .image-height {
     height: 200px;
 }
+
+.searchbar {
+    width: 50%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.searchbutton {
+    height: 40px;
+    align-content: center;
+}
+
+.input-height {
+    height: 60px;
+    margin-bottom: 0;
+    font-size: 24px;
+}
