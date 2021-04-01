@@ -81,8 +81,8 @@ var createEventElements = function (data) {
 };
 
 var createNewsElements = function(data) {
-
-    for (i = 0; i < 4; i++) {
+    // run loop to display news cards
+    for (i = 0; i < 9; i++) {
         var newsCardEl = $('<div>')
             .addClass('cell flex-container')
             .attr('id', 'news-card-container' + idArr[i]);
@@ -107,15 +107,6 @@ var createNewsElements = function(data) {
 
         $('#card' + idArr[i]).append(newsHeadlineEl, newsImageEl, newsSourceEl);
     };
-        // .text(data.articles[i].source.name)
-            // .addClass('bold');
-        
-        // var newsUrlEl = $('<a>')
-        //     .attr('href', data.articles[i].url)
-        //     .text('Click Here to View Article');
-
-        
-     
 };
 
 // on submit run search function
