@@ -90,16 +90,19 @@ var createNewsElements = function(data) {
         $('#content1').append(newsEl);
 
         var newsImageEl = $('<img>')
-            .attr('src', data.articles[i].image);
+            .attr('src', data.articles[i].image)
+            .addClass("image-height")
         var newsSourceEl = $('<p>')
             .text(data.articles[i].source.name)
+            .addClass('bold');
         var newsHeadlineEl = $('<p>')
-            .text(data.articles[i].title);
+            .text(data.articles[i].title)
+            .addClass('bold');
         var newsUrlEl = $('<a>')
             .attr('href', data.articles[i].url)
             .text('Click Here to View Article');
 
-        $('#news-card' + idArr[i]).append(newsImageEl, newsSourceEl, newsHeadlineEl);
+        $('#news-card' + idArr[i]).append(newsHeadlineEl, newsImageEl, newsSourceEl, newsUrlEl);
     };  
 };
 
