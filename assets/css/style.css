@@ -8,9 +8,10 @@
     grid-template-rows: 1fr 2fr 2fr 2fr;
     grid-template-areas:
     "nav nav nav nav"
-    "sidebar content1 content1 content1"
-    "sidebar content1 content1 content1"
     "sidebar weather weather weather"
+    "sidebar content1 content1 content1"
+    "sidebar content1 content1 content1"
+    
 }
 
 #nav{
@@ -33,6 +34,24 @@
 #weather{
     grid-area: weather;
     overflow-y:scroll;
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px;
+
+}
+
+.forecast{
+    display: flex;
+}
+
+.forecast-div{
+    border: solid 1px black;
+    border-radius: 8px;
+    background-color: rgb(39, 141, 204);
+    height: 300px;
+    width: 250px;
+    margin: 0 5px;
+    color: white;
 }
 
 /* #content2{

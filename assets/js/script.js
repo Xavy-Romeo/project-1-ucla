@@ -28,7 +28,12 @@ var search = function(event) {
     // run API calls
     eventInfo(userInput);
     newsInfo(userInput);
+    // createForecastElements();
     
+    
+
+
+
     // create random variable
     random = Math.random();
 };
@@ -106,6 +111,19 @@ var createEventElements = function (data) {
         };
 };
 
+var createForecastElements = function() {
+    var forecastTitleEl = $('<p>').addClass('forecast-title').text('5-Day Forecast');
+    var forecastDivEl = $('<div>').addClass('forecast')
+    $('#weather').append(forecastTitleEl, forecastDivEl)
+    
+    var forecastDiv = $('<div>').addClass('forecast-div');
+    var forecastDiv1 = $('<div>').addClass('forecast-div');
+    var forecastDiv2 = $('<div>').addClass('forecast-div');
+    var forecastDiv3 = $('<div>').addClass('forecast-div');
+    var forecastDiv4 = $('<div>').addClass('forecast-div');
+    forecastDivEl.append(forecastDiv, forecastDiv1, forecastDiv2, forecastDiv3, forecastDiv4);
+};
+
 var createNewsElements = function(data) {
     // create news container with random id
     newsContainerEl = $('<div>').attr('id', 'news-container' + random);
@@ -157,3 +175,6 @@ var clear = function() {
 
 // on submit run search function
 $('#nav').on('submit', search);
+
+
+createForecastElements();
