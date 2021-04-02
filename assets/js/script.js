@@ -28,12 +28,7 @@ var search = function(event) {
     // run API calls
     eventInfo(userInput);
     newsInfo(userInput);
-    // createForecastElements();
     
-    
-
-
-
     // create random variable
     random = Math.random();
 };
@@ -50,8 +45,19 @@ var eventInfo = function(userInput) {
             });
         } 
     });
-    
 };
+
+// pulls weather data from city searched
+var weatherInfo = function(userInput){
+    var weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=3a01189ad2669a4fe12bba52ee8f9ead&units=imperial';
+    fetch(weatherUrl)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(response) {
+            createForecastElements(response);
+        })
+}
 
 // pulls news data from city searched
 var newsInfo = function(userInput) {
@@ -111,7 +117,7 @@ var createEventElements = function (data) {
         };
 };
 
-var createForecastElements = function() {
+var createForecastElements = function(data) {
     var forecastTitleEl = $('<p>').addClass('forecast-title').text('5-Day Forecast');
     var forecastDivEl = $('<div>').addClass('forecast')
     $('#weather').append(forecastTitleEl, forecastDivEl)
@@ -175,6 +181,5 @@ var clear = function() {
 
 // on submit run search function
 $('#nav').on('submit', search);
-
 
 createForecastElements();
