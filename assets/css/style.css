@@ -10,7 +10,7 @@
     "nav nav nav nav"
     "sidebar content1 content1 content1"
     "sidebar content1 content1 content1"
-    "sidebar content1 content1 content1"
+    "sidebar weather weather weather"
 }
 
 #nav{
@@ -28,6 +28,11 @@
     flex-wrap: wrap; */
     overflow-y: scroll;
     grid-area: content1
+}
+
+#weather{
+    grid-area: weather;
+    overflow-y:scroll;
 }
 
 /* #content2{

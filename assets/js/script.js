@@ -1,3 +1,7 @@
+$(function() {
+    $("#page-wrap").wrapInner("<table cellspacing='30'><tr>");
+    $(".post").wrap("<td>");
+  });
 var idArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 var random;
 var newsContainerEl;
