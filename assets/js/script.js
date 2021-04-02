@@ -23,35 +23,38 @@ var search = function(event) {
     }
     else {
         // clear previous data function
-        clear();
+        clear(random);
     }
 
-    // run API calls
-    eventInfo(cityInput);
-    newsInfo(cityInput);
-    
     // create random variable
     random = Math.random();
+
+    // run API calls
+    eventInfo(cityInput, random);
+    newsInfo(cityInput, random);
+    
+    
 };
 
 // pulls upcoming events from city searched
-var eventInfo = function(cityInput) {
+var eventInfo = function(cityInput, random) {
     var ticketMasterUrl = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + cityInput + "&apikey=SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk"
     fetch(ticketMasterUrl)
     .then (function(eventData) {
         // request was successful
         if(eventData.ok) {
             eventData.json().then(function(eventData) {
-                createEventElements(eventData);
+                createEventElements(eventData, random);
             });
         } 
     });
 };
 
 // pulls weather data from city searched
-var weatherInfo = function(cityInput){
+var weatherInfo = function(cityInput, random){
     // hard code weather info; then enter into search function and pass cityInput
     cityInput = 'Hollywood';
+    random = 3333;
     
     // fetch weather coordinates based on cityInput
     var weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=3a01189ad2669a4fe12bba52ee8f9ead&units=imperial';
@@ -62,11 +65,12 @@ var weatherInfo = function(cityInput){
         }
     })
     .then(function(weatherData){
-        fetchWeather(weatherData);             
+        fetchWeather(weatherData, random);             
     });
 
-    var fetchWeather = function(weatherData) {
-        // pull lat and lon for new api
+    // fetch forecast data
+    var fetchWeather = function(weatherData, random) {
+        // pull lat and lon coordinates
         cityLat = weatherData.city.coord.lat;
         cityLon = weatherData.city.coord.lon;
 
@@ -77,28 +81,26 @@ var weatherInfo = function(cityInput){
              return forecastData.json();
          })
          .then(function(forecastData) {
-             createForecastElements(forecastData);
+             createForecastElements(forecastData, random);
          })
      }  
 };
 
-
-
 // pulls news data from city searched
-var newsInfo = function(cityInput) {
+var newsInfo = function(cityInput, random) {
     var newsUrl = "https://gnews.io/api/v4/search?q=" + cityInput + "&lang=en&token=458db7b885eab5f1dca2b9aae7d989b7";
     fetch(newsUrl)
     .then (function(newsData) {
         // request was successful
         if(newsData.ok) {
             newsData.json().then(function(newsData) {
-                createNewsElements(newsData);
+                createNewsElements(newsData, random);
             });
         } 
     });
 };
 
-var createEventElements = function (data) {
+var createEventElements = function (data, random) {
     eventsContainerEl = $('<section>').attr('id', 'events-container' + random);
     $('#sidebar').append(eventsContainerEl);
     
@@ -141,7 +143,7 @@ var createEventElements = function (data) {
         };
 };
 
-var createForecastElements = function(data) {
+var createForecastElements = function(data, random) {
     
     console.log('Forecast Data', data);
     // create container to hold Event Cards
@@ -156,9 +158,14 @@ var createForecastElements = function(data) {
     var forecastDiv3 = $('<div>').addClass('forecast-div');
     var forecastDiv4 = $('<div>').addClass('forecast-div');
     forecastDivEl.append(forecastDiv, forecastDiv1, forecastDiv2, forecastDiv3, forecastDiv4);
+
+    var forecastData = $('<p>').text('Temp: '+data.daily[1].temp.max+ ' \xB0F');
+    console.log(forecastData);
+    console.log('temp', data.daily[1].temp.max)
+    forecastDiv.append(forecastData);
 };
 
-var createNewsElements = function(data) {
+var createNewsElements = function(data, random) {
     // create news container with random id
     newsContainerEl = $('<div>').attr('id', 'news-container' + random);
     $('#content1').append(newsContainerEl);
@@ -201,7 +208,7 @@ var createNewsElements = function(data) {
     };
 };
 
-var clear = function() {
+var clear = function(random) {
     // clear previous search data
     eventsContainerEl.remove();
     newsContainerEl.remove();
@@ -212,5 +219,3 @@ $('#nav').on('submit', search);
 
 // testing hardcode, then remove function call once done
 weatherInfo();
-
-createForecastElements();
