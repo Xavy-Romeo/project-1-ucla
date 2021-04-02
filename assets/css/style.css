@@ -14,7 +14,7 @@
 }
 
 #nav{
-    background: #22bb5b;
+    background-color: rgb(39, 141, 204);
     grid-area: nav;
 }
 
@@ -34,7 +34,6 @@
     background: skyblue;
     grid-area: content2
 }
-
 #content3{
     background: teal;
     grid-area: content3
@@ -67,4 +66,40 @@
 #city-search-p {
     padding-left: 2rem;
     padding-top: .9rem;
+}
+
+.bold {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.image-height {
+    height: 200px;
+}
+
+.logo-image {
+    float: right;
+    margin-top: 0;
+    height: 100px;
+    padding-top: 20px;
+
+}
+
+.searchbar {
+    width: 50%;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    display:inline-flex;
+}
+
+.input-height {
+    height: 60px;
+    margin-bottom: 0;
+    font-size: 24px;
+}
+
+.event-header {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
 }
