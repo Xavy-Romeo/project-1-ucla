@@ -23,34 +23,34 @@ var search = function(event) {
     }
     else {
         // clear previous data function
-        clear(random);
+        clear();
     }
 
     // create random variable
     random = Math.random();
 
     // run API calls
-    eventInfo(cityInput, random);
-    newsInfo(cityInput, random);
-    weatherInfo(cityInput, random);  
+    eventInfo(cityInput);
+    newsInfo(cityInput);
+    weatherInfo(cityInput);  
 };
 
 // pulls upcoming events from city searched
-var eventInfo = function(cityInput, random) {
+var eventInfo = function(cityInput) {
     var ticketMasterUrl = "https://app.ticketmaster.com/discovery/v2/events.json?city=" + cityInput + "&apikey=SanCf9UYURGBDmAfYLJ5r0fOH8G7QqGk"
     fetch(ticketMasterUrl)
     .then (function(eventData) {
         // request was successful
         if(eventData.ok) {
             eventData.json().then(function(eventData) {
-                createEventElements(eventData, random);
+                createEventElements(eventData);
             });
         } 
     });
 };
 
 // pulls weather data from city searched
-var weatherInfo = function(cityInput, random){
+var weatherInfo = function(cityInput){
     // fetch weather coordinates based on cityInput
     var weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=3a01189ad2669a4fe12bba52ee8f9ead&units=imperial';
     fetch(weatherUrl)
@@ -60,11 +60,11 @@ var weatherInfo = function(cityInput, random){
         }
     })
     .then(function(weatherData){
-        fetchWeather(weatherData, random);             
+        fetchWeather(weatherData);             
     });
 
     // fetch forecast data
-    var fetchWeather = function(weatherData, random) {
+    var fetchWeather = function(weatherData) {
         // pull lat and lon coordinates
         cityLat = weatherData.city.coord.lat;
         cityLon = weatherData.city.coord.lon;
@@ -76,36 +76,36 @@ var weatherInfo = function(cityInput, random){
              return forecastData.json();
          })
          .then(function(forecastData) {
-             createForecastElements(forecastData, random);
+             createForecastElements(forecastData, cityInput);
          })
      }  
 };
 
 // pulls news data from city searched
-var newsInfo = function(cityInput, random) {
+var newsInfo = function(cityInput) {
     var newsUrl = "https://gnews.io/api/v4/search?q=" + cityInput + "&lang=en&token=458db7b885eab5f1dca2b9aae7d989b7";
     fetch(newsUrl)
     .then (function(newsData) {
         // request was successful
         if(newsData.ok) {
             newsData.json().then(function(newsData) {
-                createNewsElements(newsData, random);
+                createNewsElements(newsData);
             });
         } 
     });
 };
 
-var createEventElements = function (data, random) {
+var createEventElements = function (data) {
     eventsContainerEl = $('<section>').attr('id', 'events-container' + random);
     $('#sidebar').append(eventsContainerEl);
     
-    // create search results title
-    var eventsTitleEl = $('<p>')
-        .text('Next events in: ' + cityInput)
-        .attr('id', 'result-title');
+    // // create search results title
+    // var eventsTitleEl = $('<h2>')
+    //     .text('Results for: ' + cityInput)
+    //     .attr('id', 'result-title');
 
-    // append title to events section
-    eventsContainerEl.append(eventsTitleEl);
+    // // append title to events section
+    // eventsContainerEl.append(eventsTitleEl);
 
         // run loop to display 10 events
         for (i = 0; i < 10; i++) {
@@ -144,7 +144,7 @@ var createForecastElements = function(data, random) {
     $('#weather').append(forecastContainerEl);
     
     // create forecast title
-    var forecastTitleEl = $('<p>').addClass('forecast-title').text('5-Day Forecast');
+    var forecastTitleEl = $('<p>').addClass('forecast-title').text('Results for: ' + );
     // create container to hold forecast
     var forecastDivEl = $('<div>').addClass('forecast');
     forecastContainerEl.append(forecastTitleEl, forecastDivEl);
