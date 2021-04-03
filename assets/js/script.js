@@ -32,8 +32,7 @@ var search = function(event) {
     // run API calls
     eventInfo(cityInput, random);
     newsInfo(cityInput, random);
-    
-    
+    weatherInfo(cityInput, random);  
 };
 
 // pulls upcoming events from city searched
@@ -52,10 +51,6 @@ var eventInfo = function(cityInput, random) {
 
 // pulls weather data from city searched
 var weatherInfo = function(cityInput, random){
-    // hard code weather info; then enter into search function and pass cityInput
-    cityInput = 'Hollywood';
-    random = 3333;
-    
     // fetch weather coordinates based on cityInput
     var weatherUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=3a01189ad2669a4fe12bba52ee8f9ead&units=imperial';
     fetch(weatherUrl)
@@ -144,25 +139,61 @@ var createEventElements = function (data, random) {
 };
 
 var createForecastElements = function(data, random) {
+    // create forecast container with random id
+    forecastContainerEl = $('<div>').attr('id', 'forecast-container' + random);
+    $('#weather').append(forecastContainerEl);
     
-    console.log('Forecast Data', data);
-    // create container to hold Event Cards
-    
+    // create forecast title
     var forecastTitleEl = $('<p>').addClass('forecast-title').text('5-Day Forecast');
+    // create container to hold forecast
     var forecastDivEl = $('<div>').addClass('forecast');
-    $('#weather').append(forecastTitleEl, forecastDivEl);
-    
-    var forecastDiv = $('<div>').addClass('forecast-div');
-    var forecastDiv1 = $('<div>').addClass('forecast-div');
-    var forecastDiv2 = $('<div>').addClass('forecast-div');
-    var forecastDiv3 = $('<div>').addClass('forecast-div');
-    var forecastDiv4 = $('<div>').addClass('forecast-div');
-    forecastDivEl.append(forecastDiv, forecastDiv1, forecastDiv2, forecastDiv3, forecastDiv4);
+    forecastContainerEl.append(forecastTitleEl, forecastDivEl);
 
-    var forecastData = $('<p>').text('Temp: '+data.daily[1].temp.max+ ' \xB0F');
-    console.log(forecastData);
-    console.log('temp', data.daily[1].temp.max)
-    forecastDiv.append(forecastData);
+    // for loop to create forecast elements
+    for (i=0; i<5; i++) {
+        // get unix date data and format it
+        var unixDateData = data.daily[i].dt;
+        var date = new Date(unixDateData*1000).toLocaleDateString('en-US');
+
+        // create each forecast container
+        var forecastDiv = $('<div>').attr('id', 'forecast-div'+idArr[i]);
+
+        forecastDivEl.append(forecastDiv);
+
+        // source url for forecast icons
+        var currentIconUrl = 'https://openweathermap.org/img/wn/' + data.current.weather[0].icon +'@2x.png';
+        var forecastIconUrl = 'https://openweathermap.org/img/wn/' + data.daily[i].weather[0].icon +'@2x.png';
+
+        // current weather elements
+        if (i===0) {
+            var currentDate = $('<h3>')
+                .text('Current Weather')
+                .addClass('current-date')
+            var currentIcon = $('<img>').attr('src', currentIconUrl);
+            var currentTemp = $('<p>').text('Temp: '+data.current.temp+' \xB0F');
+            var currentHumidity = $('<p>').text('Humidity: '+data.current.humidity+'%');
+            var currentUvi = $('<p>').text('UV Index: '+data.current.uvi)
+            
+            forecastDiv.addClass('current-weather current');
+            forecastDiv.append(currentDate, currentIcon, currentTemp, currentHumidity, currentUvi);
+        }
+        // forecast weather elements
+        else {
+            var forecastDate = $('<h3>')
+                .text(date)
+                .addClass('forecast-date')
+            var forecastIcon = $('<img>').attr('src', forecastIconUrl);
+            var forecastTempHigh = $('<p>').text('High: '+data.daily[i].temp.max+' \xB0F');
+            var forecastTempLow = $('<p>').text('Low: '+data.daily[i].temp.min+' \xB0F');
+            var forecastHumidity = $('<p>').text('Humidity: '+data.daily[i].humidity+'%');
+            var forecastUvi = $('<p>').text('UV Index: '+data.daily[i].uvi)
+            
+            forecastDiv
+                .removeClass('current-weather current')
+                .addClass('forecast-div')
+                .append(forecastDate, forecastIcon, forecastTempHigh, forecastTempLow, forecastHumidity, forecastUvi);
+        }
+    }
 };
 
 var createNewsElements = function(data, random) {
@@ -212,10 +243,8 @@ var clear = function(random) {
     // clear previous search data
     eventsContainerEl.remove();
     newsContainerEl.remove();
+    forecastContainerEl.remove();
 };
 
 // on submit run search function
 $('#nav').on('submit', search);
-
-// testing hardcode, then remove function call once done
-weatherInfo();
