@@ -24,6 +24,12 @@
    overflow-y: scroll;
 }
 
+#result-title{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
 #content1{
     /* display: flex;
     flex-wrap: wrap; */

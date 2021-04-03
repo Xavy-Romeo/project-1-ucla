@@ -138,13 +138,13 @@ var createEventElements = function (data) {
         };
 };
 
-var createForecastElements = function(data, random) {
+var createForecastElements = function(data) {
     // create forecast container with random id
     forecastContainerEl = $('<div>').attr('id', 'forecast-container' + random);
     $('#weather').append(forecastContainerEl);
     
     // create forecast title
-    var forecastTitleEl = $('<p>').addClass('forecast-title').text('Results for: ' + );
+    var forecastTitleEl = $('<p>').addClass('forecast-title').text('Results for: ' + cityInput);
     // create container to hold forecast
     var forecastDivEl = $('<div>').addClass('forecast');
     forecastContainerEl.append(forecastTitleEl, forecastDivEl);
