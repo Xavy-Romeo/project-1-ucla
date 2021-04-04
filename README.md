@@ -58,6 +58,6 @@ Repository: https://github.com/Xavy-Romeo/project-1-ucla
 HTML, Javascript, Jquery, CSS, Foundation Framework, Ticketmaster API, Open Weather API, Gnews API
 
 # Team
-Javier Vazquez
-Daniel Toomey
+Javier Vazquez </br>
+Daniel Toomey </br>
 Adam Bedingfield
