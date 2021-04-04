@@ -49,14 +49,15 @@ Next 10 upcoming events with information about the date, artist, venue and a lin
 
 
 
-# Live link to application
+# Links
+Deployed Application: https://xavy-romeo.github.io/project-1-ucla/
 
-https://xavy-romeo.github.io/project-1-ucla/
-
-
-# Repository
-
-https://github.com/Xavy-Romeo/project-1-ucla
+Repository: https://github.com/Xavy-Romeo/project-1-ucla
 
 # Technologies Used
 HTML, Javascript, Jquery, CSS, Foundation Framework, Ticketmaster API, Open Weather API, Gnews API
+
+# Team
+Javier Vazquez
+Daniel Toomey
+Adam Bedingfield
