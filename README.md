@@ -33,7 +33,7 @@ The relative location of each area of the HTML layout (search header, screen lef
 API calls are made to Ticketmaster as well as Gnews using the Javascript fetch method. Data from API calls is formatted and placed in dynamically created cards in their respective event and news section using jQuery.
 
 
-![cinfo](*/assets/images/cinfo.jpg)
+![cinfo](/assets/images/cinfo.jpg)
 
 # Live link to application
 
