@@ -18,27 +18,36 @@ var search = function(event) {
 
     // clear input value
     $('#city-input').val('');
-    
+
+    backgroundFunctions(cityInput);
+};
+
+var backgroundFunctions = function(cityInput) {
     if (!eventsContainerEl) {
-    // if (!eventsContainerEl) {
         // run API Call functions
     }
     else {
         // clear previous data function
         clear();
-    }
-
-    // create random variable
-    random = Math.random();
-
-    // run API calls
-    eventInfo(cityInput);
-    newsInfo(cityInput);
-    weatherInfo(cityInput);  
+    }    
     
-    createResultsElements(cityInput);
-    storeHistory(cityInput);
-    displayHistory();
+    // create random variable
+        random = Math.random();
+
+        // run API calls
+        eventInfo(cityInput);
+        newsInfo(cityInput);
+        weatherInfo(cityInput);  
+        
+        createResultsElements(cityInput);
+        storeHistory(cityInput);
+        displayHistory();
+};
+
+var searchHistory = function(event) {
+   var historyInput = event.target.textContent;
+   cityInput = historyInput;
+   backgroundFunctions(cityInput);
 };
 
 // pulls upcoming events from city searched
@@ -167,7 +176,7 @@ var createEventElements = function (data) {
                 .attr('id', 'card-info' + idArr[i])
                 .html('<p> Date: ' + data._embedded.events[i].dates.start.localDate + '</p>'
                     + '<p> Venue: ' + data._embedded.events[i]._embedded.venues[0].name + '</p>'
-                    + '<a href="' + data._embedded.events[i].url + '">Buy Tickets Now</a>');
+                    + '<a href="' + data._embedded.events[i].url + '" target="_blank">Buy Tickets Now</a>');
             
             // append card elments to each card
             $('#event-card' + idArr[i]).append(eventHeaderEl, eventImageEl, eventInfo);
@@ -281,7 +290,7 @@ var createNewsElements = function(data, random) {
         // create news source and link
         var newsSourceEl = $('<div>')
             .html('<p class="bold">' + data.articles[i].source.name + '</p>'
-                + '<a href=' + data.articles[i].url + '>Click Here to View Article</a>')
+                + '<a href=' + data.articles[i].url + ' target="_blank">Click Here to View Article</a>')
             .addClass('card-section');
 
         // append card elements to each card
@@ -305,6 +314,8 @@ var displayHistory = function(cinfoArr){
             $('.history-container').append(historyEl);
         }
     }
+
+    $('.history-container').on('click', searchHistory);
 };
 
 var storeHistory = function(cityInput) {    
