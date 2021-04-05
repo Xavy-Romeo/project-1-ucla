@@ -137,7 +137,7 @@ var createResultsElements = function(){
 
     historyEl.append(historyTitle, historyElementsContainer);
 };
-
+ 
 var createEventElements = function (data) {
     eventsContainerEl = $('<section>').attr('id', 'events-container' + random);
     $('#sidebar').append(eventsContainerEl);
