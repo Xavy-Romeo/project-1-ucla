@@ -1,5 +1,7 @@
 # Cinfo
+![Logo](assets/images/logo.png)
 
+ # About
 The objective of this group project was to create an interactive application using at least two server-side APIs.
 
 The high concept of the Cinfo web application is a simple solution answer to the question of what to do when you want to experience the life of the city. It is a streamlined events, arts, and culture aggregator focused towared metropolitan areas. It's designed to be used at home and on the go, with an unobtrusive design and user experience. 
@@ -32,14 +34,38 @@ The relative location of each area of the HTML layout (search header, screen lef
 
 API calls are made to Ticketmaster as well as Gnews using the Javascript fetch method. Data from API calls is formatted and placed in dynamically created cards in their respective event and news section using jQuery.
 
-
 ![cinfo](/assets/images/cinfo.jpg)
 
 # Live link to application
 
 https://xavy-romeo.github.io/project-1-ucla/
 
-
 # Repository
 
 https://github.com/Xavy-Romeo/project-1-ucla
+
+# Layout
+The layout includes a user input city search bar and a website logo in the header. Content on events is displayed on the left with a forecast above displayed news.
+![Layout](assets/images/layout.png)
+
+5 day forecast detailing the current weather and the following 4 days. Details include a high temp, low temp, humidity, and UV index. Obtained through Open Weather API.
+![Weather](assets/images/forecast.png)
+
+Next 10 upcoming events with information about the date, artist, venue and a link to purchase tickets on ticketmaster. Obtained through ticketmaster API.
+![Event](assets/images/event.png)
+
+9 most recent news articles about searched city including a title, detail photo, source, and link to read full article. Obtained through Gnews API.
+![news](assets/images/news.png)
+
+# Links
+Deployed Application: https://xavy-romeo.github.io/project-1-ucla/
+
+Repository: https://github.com/Xavy-Romeo/project-1-ucla
+
+# Technologies Used
+HTML, Javascript, Jquery, CSS, Foundation Framework, Ticketmaster API, Open Weather API, Gnews API
+
+# Team
+Javier Vazquez </br>
+Daniel Toomey </br>
+Adam Bedingfield

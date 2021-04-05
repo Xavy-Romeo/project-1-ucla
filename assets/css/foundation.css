@@ -3276,7 +3276,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
     border: solid 2px;
     border-radius: 4px;
     background-color: #e6e6e6;
-    padding: 2px;
+    padding: 4px;
     margin-bottom: 0; }
 
 .card-image {

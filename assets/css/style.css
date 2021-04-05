@@ -1,22 +1,26 @@
-
-
 .container{
     display:grid;
     height:100vh;
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 2fr 2fr 2fr;
+    gap: .25rem;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 6fr 10fr;
     grid-template-areas:
-    "nav nav nav nav"
-    "sidebar weather weather weather"
-    "sidebar content1 content1 content1"
-    "sidebar content1 content1 content1"
-    
+    "results history"
+    "sidebar weather"
+    "sidebar content1"
 }
 
 #nav{
     background-color: rgb(39, 141, 204);
-    grid-area: nav;
+}
+
+.section-title{
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(150, 150, 150);
+    border: solid black 2px;
+    height: 50px;
 }
 
 #sidebar{
@@ -24,15 +28,53 @@
    overflow-y: scroll;
 }
 
-#result-title{
-    font-size: 20px;
+#results {
+    grid-area: results;
+    background-color: #e6e6e6;
+    display: flex;
+}
+
+#history{
+    grid-area: history;
+    display: flex;
+    background-color: #e6e6e6;
+}
+
+.history-div {
+    display: flex
+}
+
+.history-container{
+    display: flex;
+}
+
+#results-title-el{
+    display: flex;
+}
+
+.results-title{
+    display: flex;
+    font-size: 18px;
+    margin: 15px;
+}
+#results-city {
+    font-size: 22px;
     font-weight: bold;
-    margin: 0 10px;
+    margin: 12px 5px;
+}
+
+.history-items{
+    border: solid black 1px;
+    border-radius: 5px;
+    margin: 5px 1px;
+    padding: 15px 0;
+    font-size: 16px;
+    font-weight: bold;
+    width: 140px;
+    text-align: center;
 }
 
 #content1{
-    /* display: flex;
-    flex-wrap: wrap; */
     overflow-y: scroll;
     grid-area: content1
 }
@@ -42,19 +84,11 @@
     overflow-y:scroll;
     display: flex;
     flex-direction: column;
-    padding: 0 5px;
-    background-color: rgb(220,220,220);
 }
 
 .forecast{
     display: flex;
-}
-
-.forecast-title{
-    margin: 5px 15px 10px 15px;
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
+    padding: 3px 2px;
 }
 
 .forecast-div{
@@ -62,7 +96,7 @@
     border-radius: 8px;
     background-color: rgb(39, 141, 204);
     height: 250px;
-    width: 17.5%;
+    width: 17.9%;
     margin: 0 5px;
 }
 
