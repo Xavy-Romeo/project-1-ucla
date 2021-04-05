@@ -41,7 +41,7 @@ The layout includes a user input city search bar and a website logo in the heade
 5 day forecast detailing the current weather and the following 4 days. Details include a high temp, low temp, humidity, and UV index. Obtained through Open Weather API.
 ![Weather](assets/images/forecast.png)
 
-Next 10 upcoming events with information about the date, artist, venue and a link to purchase tickets on ticketmaster. Obtained through ticketmaster API.
+Next 10 upcoming events with information about the date, artist, venue and a link to purchase tickets on ticketmaster. Obtained through ticketmaster API. </br>
 ![Event](assets/images/event.png)
 
 9 most recent news articles about searched city including a title, detail photo, source, and link to read full article. Obtained through Gnews API.
