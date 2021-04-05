@@ -34,6 +34,16 @@ The relative location of each area of the HTML layout (search header, screen lef
 
 API calls are made to Ticketmaster as well as Gnews using the Javascript fetch method. Data from API calls is formatted and placed in dynamically created cards in their respective event and news section using jQuery.
 
+![cinfo](/assets/images/cinfo.jpg)
+
+# Live link to application
+
+https://xavy-romeo.github.io/project-1-ucla/
+
+# Repository
+
+https://github.com/Xavy-Romeo/project-1-ucla
+
 # Layout
 The layout includes a user input city search bar and a website logo in the header. Content on events is displayed on the left with a forecast above displayed news.
 ![Layout](assets/images/layout.png)
@@ -46,8 +56,6 @@ Next 10 upcoming events with information about the date, artist, venue and a lin
 
 9 most recent news articles about searched city including a title, detail photo, source, and link to read full article. Obtained through Gnews API.
 ![news](assets/images/news.png)
-
-
 
 # Links
 Deployed Application: https://xavy-romeo.github.io/project-1-ucla/
